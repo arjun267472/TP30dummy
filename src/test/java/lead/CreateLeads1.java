@@ -9,6 +9,6 @@ import org.testng.annotations.Test;
 public class CreateLeads1 extends configuration.BaseClass{
 	@Test(groups = "smoke")
 	public void userShouldAbleToCreateLeadsByEnteringMandatoryFieldsTest() throws Exception {
-	System.out.println("New file");
+	System.out.println("New file added");
 	}
 }
