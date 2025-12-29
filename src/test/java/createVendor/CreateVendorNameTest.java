@@ -45,12 +45,12 @@ public class CreateVendorNameTest {
 
 		//maximize the window
 	//	driver.manage().window().maximize();
-		wdu.maximizeWindow(driver);
+		wLib.maximizeWindow(driver);
 		//enter URl
 		driver.get(URL);
 		//wait for page load
 	//	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		wdu.waitForPageLoad(driver, 10);
+		wLib.waitImplicitly(driver, 10);
 		//step1.Login to application
 		driver.findElement(By.name("user_name")).sendKeys(USERNAME);
 		driver.findElement(By.name("user_password")).sendKeys(PASSWORD);
