@@ -1,5 +1,6 @@
 package createVendor;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,34 +8,28 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
-import genericLibraries.ExcelUtils;
-import genericLibraries.FileUtils;
-import genericLibraries.JavaUtils;
-import genericLibraries.WebDriverUtils;
+import genericutility.ExcelFileUtil;
+import genericutility.JavaUtil;
+import genericutility.PropFileUtil;
+import genericutility.WebDriverUtil;
 
 public class CreateVendorNameTest {
 	@Test
 	public void createVendorNameTest() throws Exception {
 
 		//create Obj for Utility Classes
-		FileUtils fu = new FileUtils();
-		JavaUtils ju = new JavaUtils();
-		ExcelUtils eu = new ExcelUtils();
-		WebDriverUtils wdu = new WebDriverUtils();
+		 PropFileUtil fu = new PropFileUtil();
+		JavaUtil jLib = new JavaUtil();
+		ExcelFileUtil eLib = new ExcelFileUtil();
+		WebDriverUtil wLib = new WebDriverUtil();
 
-		String BROWSER = fu.readDataFromProprtyFile("browser");
-		String URL = fu.readDataFromProprtyFile("url");
-		String USERNAME = fu.readDataFromProprtyFile("username");
-		String PASSWORD = fu.readDataFromProprtyFile("password");
+		String BROWSER = fu.readPropFile("browser");
+		String URL = fu.readPropFile("url");
+		String USERNAME = fu.readPropFile("username");
+		String PASSWORD = fu.readPropFile("password");
 
 		//read data from excel file
-		String vName = eu.ReadDataFromExcel("Trouble", 1, 1)+ju.getrandomNo();
-
-
-//		Random ran = new Random();
-//		int random = ran.nextInt(300);
-//
-//		String vName="Gokul Enterprises"+random;
+		String vName = eLib.readExcelFile("Trouble", 1, 1)+jLib.randomNum();
 
 		//Launch the browser
 		//	WebDriver driver = new ChromeDriver();
@@ -72,7 +67,7 @@ public class CreateVendorNameTest {
 		WebElement dropd = driver.findElement(By.name("glacct"));
 //		Select sel = new Select(dropd);
 //		sel.selectByContainsVisibleText("301-Sales-Hardware");
-		wdu.selectByContainsVisibleText(dropd, "301-Sales-Hardware");
+		wLib.selectByVisibleText(dropd, "301-Sales-Hardware");
 		//step6.click on 'Save' button
 		driver.findElement(By.xpath("//input[@title=\"Save [Alt+S]\"]")).click();
 		String text = driver.findElement(By.xpath("//span[@class=\"lvtHeaderText\"]")).getText();
@@ -92,7 +87,7 @@ public class CreateVendorNameTest {
 		//Click on 'sign out' 
 		WebElement signoutEle = driver.findElement(By.linkText("Sign Out"));
 		//close the browser
-		wdu.mousehoverandclickonEle(driver, signoutEle);
+		wLib.mouseHover(driver, signoutEle);
 		Thread.sleep(5000);
 		driver.quit();
 	}
